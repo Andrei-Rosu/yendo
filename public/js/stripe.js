@@ -7,9 +7,11 @@ export const bookEvent = async placeId => {
   try {
     // 1) Get checkout session from API
     const session = await axios(
-      `http://127.0.0.1:3210/api/v1/bookings/checkout-session/${placeId}`
+      // Dev url
+      // `http://127.0.0.1:3210/api/v1/bookings/checkout-session/${placeId}`
+      `/api/v1/bookings/checkout-session/${placeId}`
     );
-    console.log(session);
+    // console.log(session);
 
     // 2) Create checkout form + charge the credit card
     await stripe.redirectToCheckout({

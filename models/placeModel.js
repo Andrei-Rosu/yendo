@@ -181,10 +181,10 @@ placeSchema.pre(/^find/, function(next) {
   next();
 });
 
-placeSchema.post(/^find/, function(docs, next) {
-  console.log(`Query took ${Date.now() - this.start} milliseconds`);
-  next();
-});
+// placeSchema.post(/^find/, function(docs, next) {
+//   console.log(`Query took ${Date.now() - this.start} milliseconds`);
+//   next();
+// });
 
 // Aggregation middleware
 

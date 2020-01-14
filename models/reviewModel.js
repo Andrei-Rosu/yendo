@@ -66,7 +66,7 @@ reviewSchema.statics.calcRatings = async function(placeId) {
       }
     }
   ]);
-  console.log(stats);
+  // console.log(stats);
   // Updating Places document after each review with the number or reviews
   // and the average rating
   if (stats.length > 0) {
@@ -89,7 +89,7 @@ reviewSchema.post('save', function() {
 
 reviewSchema.pre(/^findOneAnd/, async function(next) {
   this.r = await this.findOne();
-  console.log(this.r);
+  // console.log(this.r);
   next();
 });
 reviewSchema.post(/^findOneAnd/, async function() {
