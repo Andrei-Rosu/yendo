@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -22,36 +23,48 @@ const app = express();
 // Trust proxies(required for Heroku)
 app.enable('trust proxy');
 
-// Add headers
-app.use(function(req, res, next) {
-  // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', '127.0.0.1:3210');
-
-  // Request methods you wish to allow
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET, POST, OPTIONS, PUT, PATCH, DELETE'
-  );
-
-  // Request headers you wish to allow
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-Requested-With,content-type'
-  );
-
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  res.setHeader('Access-Control-Allow-Credentials', true);
-
-  // Pass to next layer of middleware
-  next();
-});
+// // Add headers CORS without "cors" library
+// app.use(function(req, res, next) {
+//   // Website you wish to allow to connect
+//   res.setHeader('Access-Control-Allow-Origin', '127.0.0.1:3210');
+//
+//   // Request methods you wish to allow
+//   res.setHeader(
+//     'Access-Control-Allow-Methods',
+//     'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+//   );
+//
+//   // Request headers you wish to allow
+//   res.setHeader(
+//     'Access-Control-Allow-Headers',
+//     'X-Requested-With,content-type'
+//   );
+//
+//   // Set to true if you need the website to include cookies in the requests sent
+//   // to the API (e.g. in case you use sessions)
+//   res.setHeader('Access-Control-Allow-Credentials', true);
+//
+//   // Pass to next layer of middleware
+//   next();
+// });
 
 // Set PUG as template engine and location of views
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // Global Middlewares
+
+// CORS with "cors" library
+app.use(cors());
+// Access-Control-Allow-Origin * - Allows Access from all origins to API
+
+// Implement OPTIONS for preflight CORS
+app.options('*', cors());
+
+// app.use(cors({
+//   origin:"https://www.yendo.com"
+// }));
+// ONLY allows requests to the API coming from specified origin (https://www.yendo.com)
 
 // Serving static files
 //app.use(express.static(`${__dirname}/public`));
