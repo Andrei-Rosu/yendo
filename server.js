@@ -38,3 +38,11 @@ process.on('unhandledRejection', err => {
     process.exit(1);
   });
 });
+
+// Responding to SIGTERM signal from Heroku
+process.on('SIGTERM', () => {
+  console.log('SIGTERM RECEIVED. Shutting down gracefully');
+  server.close(() => {
+    console.log('Process terminated!');
+  });
+});

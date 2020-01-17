@@ -16,8 +16,11 @@ const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
-
+// Start express app
 const app = express();
+
+// Trust proxies(required for Heroku)
+app.enable('trust proxy');
 
 // Add headers
 app.use(function(req, res, next) {
