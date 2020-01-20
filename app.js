@@ -48,9 +48,9 @@ app.enable('trust proxy');
 //   next();
 // });
 
-// Set PUG as template engine and location of views
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
+// // Set PUG as template engine and location of views
+// app.set('view engine', 'pug');
+// app.set('views', path.join(__dirname, 'views'));
 
 // Global Middlewares
 
