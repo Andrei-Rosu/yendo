@@ -11,7 +11,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 
   // 3) Render template using place data from step 1
 
-  res.status(200).render('overview', {
+  res.status(200).send({
     title: 'All Places',
     places
   });
@@ -31,20 +31,20 @@ exports.getPlace = catchAsync(async (req, res, next) => {
 
   // 2) Render template using data from step 1
 
-  res.status(200).render('place', {
+  res.status(200).send('place', {
     title: `${place.name}`,
     place
   });
 });
 
 exports.getLoginForm = (req, res) => {
-  res.status(200).render('login', {
+  res.status(200).send('login', {
     title: 'Log into your account'
   });
 };
 
 exports.getAccount = (req, res) => {
-  res.status(200).render('account', {
+  res.status(200).send('account', {
     title: 'Your account'
   });
 };
@@ -57,7 +57,7 @@ exports.getMyEvents = catchAsync(async (req, res, next) => {
   const placeIds = bookings.map(el => el.place);
   const places = await Place.find({ _id: { $in: placeIds } });
 
-  res.status(200).render('overview', {
+  res.status(200).send('overview', {
     title: 'My Events',
     places
   });
@@ -75,7 +75,7 @@ exports.updateUserData = catchAsync(async (req, res, next) => {
       runValidators: true
     }
   );
-  res.status(200).render('account', {
+  res.status(200).send('account', {
     title: 'Your account',
     user: updatedUser
   });

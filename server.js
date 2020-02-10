@@ -60,15 +60,7 @@ mongoose
 appp.prepare().then(() => {
   const port = process.env.PORT || 3210;
   const server = express();
-  server.get('*', (req, res) => {
-    return handle(req, res);
-  });
-  server.get('/', async (req, res) => {
-    res.json({
-      title: 'First page',
-      otherProps: ''
-    });
-  });
+  server.use(app);
   server.listen(port, () => {
     console.log(`App running on port ${port}...`);
   });

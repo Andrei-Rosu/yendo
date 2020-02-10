@@ -10,7 +10,9 @@ const Index = props => (
     <ul>
       {props.places.map(place => (
         <li key={place.id}>
-          <a>{place.name}</a>
+          <Link href="/p/[id]" as={`/p/${place.id}`}>
+            <a>{place.name}</a>
+          </Link>
         </li>
       ))}
     </ul>

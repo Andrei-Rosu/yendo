@@ -48,9 +48,9 @@ app.enable('trust proxy');
 //   next();
 // });
 
-// // Set PUG as template engine and location of views
+// Set PUG as template engine and location of views
 // app.set('view engine', 'pug');
-// app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));
 
 // Global Middlewares
 
@@ -129,7 +129,7 @@ app.all('*', (req, res, next) => {
   next(
     new AppError(
       `Cannot find ${req.originalUrl} on this server. Maybe you put it somewhere else?`,
-      404
+      40
     )
   );
 });
